@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm 
-from django.contrib.auth.models import User   
+from django.contrib.auth.models import User  
+from django.contrib.auth import login 
 
 # Create your views here.
 
@@ -22,6 +23,8 @@ def signup(request):
             try:
                 user = User.objects.create_user(username=request.POST['username'], password=request.POST['password1'])
                 user.save()
+                # usuario
+                login(request, user)
                 return redirect('tasks')
             except:
                 # return HttpResponse('el usuario ya existe')
