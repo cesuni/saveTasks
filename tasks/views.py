@@ -2,13 +2,16 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm 
 from django.contrib.auth.models import User  
-from django.contrib.auth import login 
+from django.contrib.auth import login, logout
 
 # Create your views here.
 
 
 def home(request):
     return render(request, 'home.html') 
+
+def tasks(request):
+    return render(request, 'tasks.html')
 
 
 # register user
@@ -38,9 +41,11 @@ def signup(request):
             'error': 'passwords no coinciden'
     })
 
+# logout
+def endsession(request):
+    logout(request)
+    return redirect('home')
 
-def tasks(request):
-    return render(request, 'tasks.html')
    
 
    
